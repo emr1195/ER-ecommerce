@@ -41,23 +41,17 @@ export default function ProductForm({
 
   async function uploadImages(ev) {
     const files = ev.target?.files;
-    if (files?.length > 0) {
-      setIsUploading(true);
+    if(files?.length > 0) {
       const data = new FormData();
-      for (const file of files) {
-        data.append("file", file);
-      }
-      const res = await axios.post("/api/upload", data);
-      setImages((oldImages) => {
-        return [...oldImages, ...res.data.links];
-      });
-      setIsUploading(false);
+      for (const file of files ){
+        data.append('file', file);
+      } 
+      const res = await axios.post('/api/upload', data);
+      console.log(res.data);
     }
   }
 
-  function updateImagesOrder(images) {
-    setImages(images);
-  }
+  
 
   return (
     <form onSubmit={saveProduct}>
@@ -69,27 +63,8 @@ export default function ProductForm({
       />
 
       <label>Imagenes</label>
-      <div className="mb-2 flex flex-wrap gap-1">
-        <ReactSortable
-          list={images}
-          className="flex flex-wrap gap-1"
-          setList={updateImagesOrder}
-        >
-          {!!images?.length &&
-            images.map((link) => (
-              <div
-                key={link}
-                className="h-24 bg-white p-4 shadow-sm rounded-sm border border-gray-200"
-              >
-                <img src={link} alt="" className="rounded-lg" />
-              </div>
-            ))}
-        </ReactSortable>
-        {isUploading && (
-          <div className="h-24 flex items-center">
-            <Spinner />
-          </div>
-        )}
+      <div className="mb-2 ">
+  
         <label className="w-24 h-24 cursor-pointer text-center flex flex-col items-center justify-center text-sm gap-1 text-primary rounded-sm bg-white shadow-sm border border-primary">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +81,7 @@ export default function ProductForm({
             />
           </svg>
 
-          <input type="file" onChange={uploadImages} className="hidden" />
+          <input type="file" onChange={uploadImages}  className="hidden" />
         </label>
       </div>
       <textarea
