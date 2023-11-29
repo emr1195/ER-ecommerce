@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import Spinner from "@/components/Spinner";
+import {ReactSortable} from "react-sortablejs";
 
 
 export default function ProductForm({
@@ -45,11 +47,16 @@ export default function ProductForm({
       for (const file of files ){
         data.append('file', file);
       } 
-      const res = await fetch('/api/upload', {
-        method: 'POST', body: data,
-      })
-      console.log(res);
+      const res = await axios.post('/api/upload', data);
+      setImages(oldImages => {
+        return [...oldImages, ...res.data.links];
+      });
+      setIsUploading(false);
     }
+  }
+
+  function updateImagesOrder(images) {
+    setImages(images);
   }
 
   
@@ -64,7 +71,22 @@ export default function ProductForm({
       />
 
       <label>Imagenes</label>
-      <div className="mb-2 ">
+      <div className="mb-2 flex flex-wrap gap-1 ">
+      <ReactSortable
+            list={images}
+            className="flex flex-wrap gap-1"
+            setList={updateImagesOrder}>
+            {!!images?.length && images.map(link => (
+              <div key={link} className="h-24 bg-white p-4 shadow-sm rounded-sm border border-gray-200">
+                <img src={link} alt="" className="rounded-lg"/>
+              </div>
+            ))}
+          </ReactSortable>
+          {isUploading && (
+            <div className="h-24 flex items-center">
+              <Spinner />
+            </div>
+          )}
   
         <label className="w-24 h-24 cursor-pointer text-center flex flex-col items-center justify-center text-sm gap-1 text-primary rounded-sm bg-white shadow-sm border border-primary">
           <svg
