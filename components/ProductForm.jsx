@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { ReactSortable } from "react-sortablejs";
-import Spinner from "@/components/Spinner";
+
 
 export default function ProductForm({
   _id,
@@ -46,8 +45,10 @@ export default function ProductForm({
       for (const file of files ){
         data.append('file', file);
       } 
-      const res = await axios.post('/api/upload', data);
-      console.log(res.data);
+      const res = await fetch('/api/upload', {
+        method: 'POST', body: data,
+      })
+      console.log(res);
     }
   }
 
