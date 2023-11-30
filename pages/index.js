@@ -8,12 +8,8 @@ export default function Home() {
     <Layout>
       <div className="flex justify-between">
         <h2>Bienvenido, {session?.user?.name}</h2>
-        <div>
-          <img
-            className="rounded-lg w-8 h-8"
-            src={session?.user?.image}
-            alt=""
-          />
+        <div className="flex bg-gray-300 gap-1 text-black rounded-lg overflow-hidden">
+          <img src={session?.user?.image} alt="" className="w-8 h-8" />
         </div>
       </div>
     </Layout>
