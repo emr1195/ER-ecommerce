@@ -30,7 +30,7 @@ export default function Products() {
             <tr>
               <td>{product.title}</td>
               <td>
-                <Link href={"/products/edit/" + product._id}>editar</Link>
+                <Link className="bg-gray-300" href={"/products/edit/" + product._id}>editar</Link>
                 <Link
                   className="bg-red-500 ml-2"
                   href={"/products/delete/" + product._id}
