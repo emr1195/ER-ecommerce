@@ -15,14 +15,14 @@ export default function ProductForm({
 }) {
   const [title, setTitle] = useState(existingTitle || "");
   const [description, setDescription] = useState(existingDescription || "");
-  const [price, setPrice] = useState(existingPrice || "");
-  const [images, setImages] = useState(existingImages || []);
+  const [category, setCategory] = useState(assignedCategory || "");
   const [productProperties, setProductProperties] = useState(
     assignedProperties || {}
   );
-  const [isUploading, setIsUploading] = useState(false);
+  const [price, setPrice] = useState(existingPrice || "");
+  const [images, setImages] = useState(existingImages || []);
   const [goToProducts, setGoToProducts] = useState(false);
-  const [category, setCategory] = useState(assignedCategory || "");
+  const [isUploading, setIsUploading] = useState(false);
   const [categories, setCategories] = useState([]);
   const router = useRouter();
   async function saveProduct(ev) {
