@@ -8,7 +8,7 @@ export default function Layout({ children }) {
   const { data: session } = useSession();
   if (!session) {
     return (
-      <div className="bg-blue-900 w-screen h-screen flex items-center">
+      <div className="bg-gray-800 w-screen h-screen flex items-center">
         <div className="text-center w-full">
           <button
             onClick={() => signIn("google")}

@@ -5,7 +5,7 @@ import Logo from "@/components/Logo";
 
 export default function Nav({ show }) {
   const inactiveLink = "flex gap-1 p-1";
-  const activeLink = inactiveLink + " bg-white text-gray-800 rounded-l-lg";
+  const activeLink = inactiveLink + " bg-white text-gray-800 rounded-md";
   const inactiveIcon = " w-6 h-6";
   const activeIcon = inactiveIcon + " text-primary";
   const router = useRouter();
